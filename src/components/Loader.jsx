@@ -1,9 +1,19 @@
-import React from 'react'
+
 
 const Loader = () => {
   return (
-    <div>
-      loader
+    <div className='loader-wrapper'>
+      <div className="spinner">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        
+      </div>
     </div>
   )
 }

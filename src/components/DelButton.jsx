@@ -19,8 +19,9 @@ api.delete(`/jobs/${id} `).then(()=>{
 //!console.log("silindi")
 dispatch(deleteJob(id));
 toast.warning("Başvuru kaldırıldı")
-});
-  }
+}).catch(()=> toast.error("Kaldırma işleminde bir sorun oluştu") );
+
+}
   
  };
   return (
@@ -75,4 +76,4 @@ toast.warning("Başvuru kaldırıldı")
   )
 };
 
-export default DelButton
+export default DelButton;

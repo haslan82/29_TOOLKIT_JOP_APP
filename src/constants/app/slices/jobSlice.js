@@ -1,45 +1,40 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  jobs: [],
+  isLoading: false,
+  error: null,
+};
 
-const initialState ={
-    jobs:[],
-    isLoading: false,
-    error: null,
-}
-
- const jobSlice =  createSlice({
-name:"job",
-initialState,
-reducers:{
-    setLoading:(state)=> {
-        
-        state.isLoading=true;
-        //console.log(state.isLoading);
+const jobSlice = createSlice({
+  name: "job",
+  initialState,
+  reducers: {
+    setLoading: (state) => {
+      state.isLoading = true;
     },
-    setError:(state, action)=>{
-        (state.isLoading= false),(state.error=action.payload);
-        
+    setError: (state, action) => {
+      state.isLoading = false;
+      state.error = action.payload;
     },
-    setJobs:(state, action)=>{
-        //console.log(action);
-        state.isLoading=false;
-        state.error=null;
-        state.jobs=action.payload;
+    setJobs: (state, action) => {
+      state.isLoading = false;
+      state.error = null;
+      state.jobs = action.payload;
     },
-
-createJob:(state, action) =>{
-  //! console.log(action);
-  state.jobs.push(action.payload);
-},
-
-deleteJob:(state, action) => {
-    //!console.log(action);
-    const index = state.jobs.findIndex((i)=> i.id === action.payload);
-    state.jobs.splice(index, 1);
-}
-
-}
-})
-
+    createJob: (state, action) => {
+      state.isLoading = false;
+      state.error = null;
+      state.jobs.push(action.payload);
+    },
+    deleteJob: (state, action) => {
+      state.isLoading = false;
+      state.error = null;
+      const index = state.jobs.findIndex((i) => i.id === action.payload);
+      state.jobs.splice(index, 1);
+    },
+  },
+});
 export default jobSlice.reducer;
-export const {setLoading, setError, setJobs, createJob, deleteJob} = jobSlice.actions;
+export const { setLoading, setError, setJobs, createJob, deleteJob } =
+  jobSlice.actions;
