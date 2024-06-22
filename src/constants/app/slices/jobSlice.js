@@ -1,4 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
+
+
 const initialState ={
     jobs:[],
     isLoading: false,
@@ -10,9 +12,34 @@ name:"job",
 initialState,
 reducers:{
     setLoading:(state)=> {
+        
         state.isLoading=true;
+        //console.log(state.isLoading);
     },
+    setError:(state, action)=>{
+        (state.isLoading= false),(state.error=action.payload);
+        
+    },
+    setJobs:(state, action)=>{
+        //console.log(action);
+        state.isLoading=false;
+        state.error=null;
+        state.jobs=action.payload;
+    },
+
+createJob:(state, action) =>{
+  //! console.log(action);
+  state.jobs.push(action.payload);
+},
+
+deleteJob:(state, action) => {
+    //!console.log(action);
+    const index = state.jobs.findIndex((i)=> i.id === action.payload);
+    state.jobs.splice(index, 1);
+}
+
 }
 })
 
 export default jobSlice.reducer;
+export const {setLoading, setError, setJobs, createJob, deleteJob} = jobSlice.actions;
