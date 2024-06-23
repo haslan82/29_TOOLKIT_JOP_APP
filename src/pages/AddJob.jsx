@@ -2,12 +2,12 @@ import { v4 } from "uuid";
 import AutoInput from "../components/AutoInput"
 import Select from "../components/Select";
 import SubmitButton from "../components/SubmitButton";
-import { statusOpt, typeOPt } from "../constants";
+import { statusOpt, typeOpt } from "../constants";
 import api from "../utils/api";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { useDispatch } from "react-redux";
-import { createJob } from "../constants/app/slices/jobSlice";
+import { createJob, setError } from "../constants/app/slices/jobSlice";
 import { useNavigate } from "react-router-dom";
 
 
@@ -50,8 +50,11 @@ dispatch(createJob(newJobData));
 navigate("/")
 
 }).
-catch(()=> toast.error("İş eklenirken bir hata oluştu."));
-  }
+catch((err)=>{
+  dispatch(setError(err.message));
+   toast.error("İş eklenirken bir hata oluştu.");
+  });
+  };
   return (
     <div className="add-page">
       <section className="container ">
@@ -62,7 +65,7 @@ catch(()=> toast.error("İş eklenirken bir hata oluştu."));
           <AutoInput label={"Lokasyon"} name="location" />
 
           <Select label={"Durum"} options={statusOpt} name="status" />
-          <Select label={"Tür"} options={typeOPt}  name="type" />
+          <Select label={"Tür"} options={typeOpt}  name="type" />
           <div>
             <SubmitButton text={"Oluştur"}  />
           </div>

@@ -2,7 +2,7 @@ import React from 'react'
 import api from "../utils/api"
 import { toast } from 'react-toastify'
 import { useDispatch } from 'react-redux'
-import { deleteJob } from '../constants/app/slices/jobSlice';
+import { deleteJob, setError } from '../constants/app/slices/jobSlice';
 
 
 
@@ -19,7 +19,11 @@ api.delete(`/jobs/${id} `).then(()=>{
 //!console.log("silindi")
 dispatch(deleteJob(id));
 toast.warning("Başvuru kaldırıldı")
-}).catch(()=> toast.error("Kaldırma işleminde bir sorun oluştu") );
+}).catch(()=> {
+  dispatch(setError(err.message));
+  toast.error("Kaldırma işleminde bir sorun oluştu");
+
+} );
 
 }
   

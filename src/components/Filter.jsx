@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { sortOpt, statusOpt, typeOPt } from "../constants";
+import { sortOpt, statusOpt, typeOpt } from "../constants";
 import Select from "./Select";
 import SubmitButton from "./SubmitButton";
 import { useDispatch } from "react-redux";
@@ -104,6 +104,7 @@ return () => {
   return (
     <div className="filter-sec">
       <h2>Filtreleme Formu</h2>
+      
       <form onSubmit={handleReset}>
         <div>
           <label>Ara</label>
@@ -117,7 +118,7 @@ return () => {
 
         <Select
           label={"Tür"}
-          options={typeOPt}
+          options={typeOpt}
           handleChange={(e) => setType(e.target.value)}
         />
 
@@ -135,3 +136,5 @@ return () => {
 };
 
 export default Filter;
+
+//!burayaa kadar dön
